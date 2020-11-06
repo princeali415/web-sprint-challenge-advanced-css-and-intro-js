@@ -227,8 +227,8 @@ Create a function called `getArtistByIndex` that takes two arguments:
  * For example, if getArtistByIndex is invoked with the artists dataset and the number 0,
  * it will return `The artist at index 0 is Amedeo Modigliani`
 */
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
+function getArtistByIndex(arr, idx) {
+  return `the artist at index ${idx} is ${arr[idx]["name"]}`
 }  
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -238,8 +238,16 @@ it returns an array with names of artists who were born in and died in 20th cent
 example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/*Your Code Here*/){
-  /*Your Code Here*/
+function get20s(arr){
+  let filteredArr = [];                                   // create new array to push too
+  for (let i in arr){                                     // intialize for loop
+    let born = arr[i]["years"].split("-").map(Number)[0]; // create born variable which targets year of each obj, splits it by the "-" and then use map method to chnage the array split gave us from string to a number. then return the 0th index in array which is the birth year
+    let death = arr[i]["years"].split("-").map(Number)[1]; // create death variable which targets year of each obj, splits it by the "-" and then use map method to change the array split gave us from string to a number. then return the 1st index in array which is the death year
+    if (born >= 1900 && death <= 2000){                     // conditional to filter through obj's that have birth greater or equal to 1900 and less than or equal too 2000
+      filteredArr.push(arr[i]["name"])                      // push to array we created
+    }
+  }
+  return filteredArr;                                       // return filteredArr which holds the filtered names of artists in 20's
 }
 
 
@@ -253,8 +261,9 @@ Create a function called `removeArtist` that takes two arguments:
  * For example, if removeArtist is invoked with the data and the number 0,
  * it will remove Amedeo Modigliani from our dataset and log the number 19.  
 */
-function removeArtist(/*Your Code Here*/) {
-   /*Your Code Here*/
+function removeArtist(arr, idx) {
+   arr.splice(idx,1);             // .splice() method to remove from desired index position.
+   return arr.length;             // return the lenght of the mutated array with the one less obj in it.
 }
    
 
@@ -273,8 +282,17 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(/*Your Code Here*/){
-    /*Your Code Here*/
+function addArtist(arr){
+    let obj = {
+      id: 25,
+      name: "Hussain Ali",
+      years: "1995 - 11/6/2020",
+      genre: "Web Design",
+      nationality: "Pakistani",
+      bio: "Retired soundcloud rapper, avid reader, lover of all things tech. Born in Luton, England"
+    }
+    arr.push(obj);
+    return arr
   }
 
   
